@@ -1,0 +1,395 @@
+/* 
+    Project: MC Server Website
+    Author: Trae (Clean Architecture Enthusiast)
+    Description: Main stylesheet handling global styles, glassmorphism, and responsive layouts.
+*/
+
+:root {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --accent-green: #78B159;
+    --accent-gold: #FFD700;
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --blur-amount: 10px;
+    --font-main: 'Inter', sans-serif;
+    --gradient-start: var(--accent-green);
+    --gradient-end: var(--accent-gold);
+    --font-heading: 'Montserrat', 'Kanit', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- Global Reset & Typography --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    background-image: url('https://images.unsplash.com/photo-1587502537745-c9b51e9cf71c?q=80&w=2070&auto=format&fit=crop'); /* Placeholder dark texture or MC image */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Overlay to darken background image */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 18, 18, 0.85);
+    z-index: -1;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- Utilities --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-amount));
+    -webkit-backdrop-filter: blur(var(--blur-amount));
+    border: 1px solid transparent;
+    border-radius: 16px;
+    padding: 2rem;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    box-shadow: 0 0 20px rgba(120, 177, 89, 0.1), 0 0 30px rgba(255, 215, 0, 0.08);
+}
+
+.section {
+    padding: 4rem 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--accent-green);
+    text-shadow: 0 0 10px rgba(120, 177, 89, 0.3);
+}
+
+/* --- Navbar --- */
+.glass-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: 1px solid var(--glass-border);
+    padding: 1rem 0;
+}
+
+.glass-nav.nav-scrolled {
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(15px);
+}
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.nav-links a:hover {
+    color: var(--accent-green);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: 0.3s;
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-heading);
+}
+
+.accent-text {
+    color: var(--accent-green);
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.shimmer {
+    background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #cccccc;
+}
+
+.server-ip-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+}
+
+#server-ip {
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: var(--accent-gold);
+}
+
+.btn-copy, .btn-cta {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-copy {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.btn-copy:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-cta {
+    display: inline-block;
+    background-color: var(--accent-gold);
+    color: #121212;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+.btn-cta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 12px rgba(255, 215, 0, 0.4), 0 0 0 rgba(255, 215, 0, 0); }
+    50% { box-shadow: 0 0 22px rgba(255, 215, 0, 0.6), 0 0 8px rgba(255, 215, 0, 0.3); }
+    100% { box-shadow: 0 0 12px rgba(255, 215, 0, 0.4), 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+/* --- Features Grid (CSS Grid) --- */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    perspective: 1000px;
+}
+
+.feature-card {
+    text-align: center;
+    transition: transform 0.12s ease, box-shadow 0.2s ease;
+    will-change: transform;
+    transform-style: preserve-3d;
+}
+
+.feature-card:hover {
+    border-color: var(--accent-green);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+}
+
+/* --- Rules List --- */
+.rules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.rule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.rule-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+}
+
+/* --- Staff (Flexbox) --- */
+.staff-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.staff-card {
+    flex: 1 1 300px; /* Grow, shrink, basis */
+    max-width: 350px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.staff-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-green);
+    margin-bottom: 1rem;
+}
+
+.staff-role {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.role-admin { background-color: #ff5555; color: white; }
+.role-mod { background-color: #55ff55; color: #121212; }
+.role-helper { background-color: #55ffff; color: #121212; }
+
+/* --- Footer --- */
+footer {
+    margin-top: auto;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem 0;
+    text-align: center;
+    color: #888;
+}
+
+/* --- Responsiveness (Media Queries) --- */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide nav links on mobile */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(18, 18, 18, 0.95);
+        flex-direction: column;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex; /* Show when active */
+    }
+
+    .hamburger {
+        display: flex; /* Show hamburger on mobile */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .server-ip-container {
+        flex-direction: column;
+    }
+}

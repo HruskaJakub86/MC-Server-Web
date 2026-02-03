@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content fade-in">
+        <h1>Welcome to <span class="accent-text shimmer">The Server</span></h1>
+        <p>Experience Minecraft like never before.</p>
+        <div class="server-ip-container glass-card">
+            <span id="server-ip">play.myserver.com</span>
+            <button class="btn-copy" onclick="copyIP()">Copy IP</button>
+        </div>
+        <a href="#" class="btn-cta">Join Now</a>
+    </div>
+</section>
+{% endblock %}
